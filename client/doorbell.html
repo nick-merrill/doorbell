@@ -15,20 +15,34 @@
   </div>
 </template>
 
-<template name="bell">
-  <button class="bell btn {{ bellButtonClass }}" id="ring">
-    {{#if bell.isActivated}}
-      <i class="fa fa-refresh fa-spin"></i>
-    {{else}}
-      <i class="fa fa-dot-circle-o"></i>
-    {{/if}}
-    <br />
-    {{ bell.name }}
-  </button>
+<template name="notFound">
+  Not found
+</template>
+
+<template name="loading">
+  Loading...
 </template>
 
 <template name="switcher">
   <i id="switch" class="fa fa-circle-o"></i>
+</template>
+
+
+
+<template name="bell">
+  {{#if bell.response}}
+    <div class="response {{bell.responseClass}}">{{bell.response}}</div>
+  {{else}}
+    <button class="bell btn {{ bellButtonClass }}" id="ring">
+      {{#if bell.isActivated}}
+        <i class="fa fa-refresh fa-spin"></i>
+      {{else}}
+        <i class="fa fa-dot-circle-o"></i>
+      {{/if}}
+      <br />
+      {{ bell.name }}
+    </button>
+  {{/if}}
 </template>
 
 <template name="receiver">
@@ -36,17 +50,11 @@
   {{#if bell.isActivated}}
     <i class="fa fa-ra fa-spin active-icon"></i>
     <div style="margin-top: 1em;">
-      <button class="btn btn-success">Come In</button>
-      <button class="btn btn-warning">Just a minute...</button>
+      <button class="action btn btn-lg btn-success" response-class="success">Come In</button>
+      <button class="action btn btn-lg btn-warning" response-class="warning">Just a minute...</button>
     </div>
-  {{else}}
   {{/if}}
-</template>
-
-<template name="notFound">
-  Not found
-</template>
-
-<template name="loading">
-  Loading...
+  <div class="bell-preview">
+    {{> bell}}
+  </div>
 </template>

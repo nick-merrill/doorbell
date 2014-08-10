@@ -11,6 +11,12 @@ html, body {
     text-align: center;
 }
 
+.bell-preview {
+    height: 300px;
+    width: 250px;
+    margin: 0 auto;
+}
+
 button.bell {
     width: 90%;
     height: calc(100% - 10px);
@@ -34,4 +40,20 @@ button.bell i {
 .active-icon {
     color: red;
     font-size: 8em;
+}
+
+.response {
+    font-size: 4em;
+    height: 100%;
+    width: 100%;
+}
+
+.response.success {
+    background: #4ab94d;
+    color: #fff;
+}
+
+.response.warning {
+    background: #ffec19;
+    color: #000;
 }

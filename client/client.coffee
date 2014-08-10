@@ -32,28 +32,24 @@ Template.switcher.events {
 
 titleAnimationInterval = null
 setAnimateTitle = (shouldBeActive) ->
-  low = 0
-  high = 5
-  titleState = low
+  big = false
   if shouldBeActive && !titleAnimationInterval?
     titleAnimationInterval = setInterval ->
-      if titleState > high
-        titleState = low
-      text = ""
-      for i in [0..titleState]
-        text += "-"
-      text += ">"
+      if big
+        text = "<---*-*--->"
+      else
+        text = "<-->"
       document.title = text
-      titleState++
+      big = !big
     , 300
   else if !shouldBeActive && titleAnimationInterval?
     clearInterval(titleAnimationInterval)
+    titleAnimationInterval = null
     document.title = 'doorbell'
 
 Template.receiver.rendered = ->
   me = @
   me.titleUpdater = Meteor.autorun ->
-    console.log(me.data)
     bell = me.data.bell
     if bell?
       b = Bells.findOne({id: bell.id})
@@ -66,3 +62,23 @@ Template.receiver.destroyed = ->
   if titleAnimationInterval?
     setAnimateTitle(false)
   @titleUpdater = null
+
+responseTimeout = null
+Template.receiver.events {
+  'click .action': (event) ->
+    $button = $(event.currentTarget)
+    text = $button.text()
+    responseClass = $button.attr('response-class')
+    bell = @bell
+    Bells.update({_id: bell._id}, {$set : {
+      response: text
+      responseClass: responseClass
+      isActivated: false
+    }})
+    if responseTimeout?
+      clearTimeout(responseTimeout)
+      responseTimeout = null
+    responseTimeout = setTimeout ->
+      Bells.update({_id: bell._id}, {$set: {response: ""}})
+    , 10000
+}
