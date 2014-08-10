@@ -3,7 +3,7 @@ Meteor.startup ->
   Bells.upsert({id: 1}, {$set: {
     id: 1
     name: "Nick's Room"
-    response: ""
+    response: null
   }})
 
 Meteor.publish 'bells', ->

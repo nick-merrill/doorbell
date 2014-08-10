@@ -63,22 +63,37 @@ Template.receiver.destroyed = ->
     setAnimateTitle(false)
   @titleUpdater = null
 
+
 responseTimeout = null
+
+clearBell = (bell, shouldDeactivate) ->
+  newProps = {
+    response: null
+    responseClass: null
+    responseIconClass: null
+  }
+  if shouldDeactivate
+    newProps.isActivated = false
+  Bells.update({_id: bell._id}, {$set: newProps})
+  clearTimeout(responseTimeout)
+  responseTimeout = null
+
 Template.receiver.events {
   'click .action': (event) ->
     $button = $(event.currentTarget)
-    text = $button.text()
-    responseClass = $button.attr('response-class')
+    responseDuration = parseInt($button.attr('response-duration')) || 15000
     bell = @bell
+    clearBell(bell)
     Bells.update({_id: bell._id}, {$set : {
-      response: text
-      responseClass: responseClass
+      response: $button.text()
+      responseClass: $button.attr('response-class')
+      responseIconClass: $button.attr('response-icon-class') || null
       isActivated: false
     }})
-    if responseTimeout?
-      clearTimeout(responseTimeout)
-      responseTimeout = null
-    responseTimeout = setTimeout ->
-      Bells.update({_id: bell._id}, {$set: {response: ""}})
-    , 10000
+    if responseDuration
+      responseTimeout = setTimeout ->
+        clearBell(bell)
+      , responseDuration
+  'click #clear': ->
+    clearBell(@bell, true)
 }

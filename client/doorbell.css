@@ -5,7 +5,7 @@ html, body {
     width: 100%;
 }
 
-.container {
+.main-container {
     width: 100%;
     height: 100%;
     text-align: center;
@@ -14,13 +14,13 @@ html, body {
 .bell-preview {
     height: 300px;
     width: 250px;
-    margin: 0 auto;
+    margin: 1em auto;
+    pointer-events: none;
 }
 
 button.bell {
-    width: 90%;
-    height: calc(100% - 10px);
-    margin: 5px auto;
+    width: 100%;
+    height: 100%;
 }
 
 button.bell {
@@ -46,6 +46,7 @@ button.bell i {
     font-size: 4em;
     height: 100%;
     width: 100%;
+    padding-top: 30%;
 }
 
 .response.success {

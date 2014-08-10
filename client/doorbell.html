@@ -7,7 +7,7 @@
 
 
 <template name="layout">
-  <div class="container">
+  <div class="main-container">
     {{> yield}}
   </div>
   <div class="switcher">
@@ -31,7 +31,12 @@
 
 <template name="bell">
   {{#if bell.response}}
-    <div class="response {{bell.responseClass}}">{{bell.response}}</div>
+    <div class="response {{bell.responseClass}}">
+      <div>{{bell.response}}</div>
+      {{#if bell.responseIconClass}}
+        <div><i class="{{bell.responseIconClass}}"></i></div>
+      {{/if}}
+    </div>
   {{else}}
     <button class="bell btn {{ bellButtonClass }}" id="ring">
       {{#if bell.isActivated}}
@@ -49,11 +54,17 @@
   <h1>{{ bell.name }}</h1>
   {{#if bell.isActivated}}
     <i class="fa fa-ra fa-spin active-icon"></i>
-    <div style="margin-top: 1em;">
-      <button class="action btn btn-lg btn-success" response-class="success">Come In</button>
-      <button class="action btn btn-lg btn-warning" response-class="warning">Just a minute...</button>
-    </div>
   {{/if}}
+  <div style="margin-top: 1em;">
+    <button class="action btn btn-lg btn-success" response-class="success"
+            response-icon-class="fa fa-thumbs-o-up">Come In</button>
+    <button class="action btn btn-lg btn-warning" response-class="warning"
+            response-icon-class="fa fa-warning"
+            response-duration="240000">Just a minute...</button>
+  </div>
+  <div style="margin-top: 0.4em;">
+    <button class="btn btn-sm btn-default" id="clear">Clear</button>
+  </div>
   <div class="bell-preview">
     {{> bell}}
   </div>
