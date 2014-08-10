@@ -1,0 +1,37 @@
+/* CSS declarations go here */
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+button.bell {
+    width: 90%;
+    height: calc(100% - 10px);
+    margin: 5px auto;
+}
+
+button.bell {
+    font-size: 2em;
+}
+
+button.bell i {
+    font-size: 2em;
+}
+
+.switcher {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+}
+
+.active-icon {
+    color: red;
+    font-size: 8em;
+}
