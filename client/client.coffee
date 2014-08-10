@@ -34,6 +34,15 @@ titleAnimationInterval = null
 setAnimateTitle = (shouldBeActive) ->
   big = false
   if shouldBeActive && !titleAnimationInterval?
+    (new PNotify {
+      title: "Doorbell"
+      text: "Click to invite in"
+      hide: false
+      desktop: {
+        desktop: true
+      }
+    }).get().click ->
+      $('.action#come-in').click()
     titleAnimationInterval = setInterval ->
       if big
         text = "<---*-*--->"
@@ -96,4 +105,5 @@ Template.receiver.events {
       , responseDuration
   'click #clear': ->
     clearBell(@bell, true)
+    PNotify.desktop.permission()
 }

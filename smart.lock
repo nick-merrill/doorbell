@@ -5,7 +5,8 @@
       "bootstrap-3": {},
       "accounts-ui-bootstrap-3": {},
       "font-awesome": {},
-      "iron-router": {}
+      "iron-router": {},
+      "pnotify": {}
     },
     "packages": {
       "bootstrap-3": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/EventedMind/iron-router.git",
         "tag": "v0.8.2",
         "commit": "05415a8891ea87a00fb1e2388585f2ca5a38e0da"
+      },
+      "pnotify": {
+        "git": "https://github.com/kidovate/meteor-pnotify.git",
+        "tag": "v2.0.6",
+        "commit": "cbd0bb220d03b20b247e4a6a7bdfc3d2c8064216"
       },
       "iron-layout": {
         "git": "https://github.com/EventedMind/iron-layout.git",
